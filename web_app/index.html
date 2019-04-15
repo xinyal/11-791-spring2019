@@ -20,6 +20,9 @@
   <!-- Custom styles for this template -->
   <link href="css/one-page-wonder.min.css" rel="stylesheet">
 
+  <!-- Link to script file -->
+  
+
 </head>
 
 <body>
@@ -50,9 +53,15 @@
   <header class="masthead text-center text-white">
     <div class="masthead-content">
       <div class="container">
-        <h6 style="font-size:220%;" align="left" class="masthead-subheading mb-0">Please press the recording button and read the following sentences</h6><br></br>
-        <p style="font-size:150%;" align="left"> Carnegie Mellon University (CMU) is a private research university based in Pittsburgh, Pennsylvania. Founded in 1900 by Andrew Carnegie as the Carnegie Technical Schools, the university became the Carnegie Institute of Technology in 1912 and began granting four-year degrees. </p><br></br>
-        <a id = "record" href="#" class="btn btn-primary btn-xl rounded-pill mt-5">Record</a>
+        <h6 style="font-size:220%;" align="left" class="masthead-subheading mb-0">Please record yourself reading the 
+          following sentences and upload the resulting file.</h6><br></br>
+        <p style="font-size:150%;" align="left">When sunlight strikes the raindrops in the air, they act like a prism 
+          and form a rainbow. The rainbow is a division of white light into many beautiful colors.  
+          These take the shape of a long round arch, with its path high above, and its two ends apparently beyond 
+          the horizon.  There is, according to legend, a boiling pot of gold at one end.  People look, but no one ever 
+          finds it.  When a man looks for something beyond his reach, his friends say he is looking for the pot of gold 
+          at the end of the rainbow.</p>
+        <input type="file" accept="audio/*" class="btn btn-primary btn-xl rounded-pill mt-5" id = "fileInput">
       </div>
     </div>
     <div class="bg-circle-1 bg-circle"></div>
@@ -61,13 +70,13 @@
     <div class="bg-circle-4 bg-circle"></div>
   </header>
 
-  <section>
+  <section id="results">
     <div class="container">
         <div class="col-lg-15 order-lg-1">
           <div class="p-5">
             <h2 class="display-4">Prediction Results</h2>
-            <p>We predict you have a 50% probability coming from california, 30% probability of coming of Washington, and 20% probability of coming from Oregon.</p>
-            <p>Are you related to any of the states mentioned above?</p>
+            <p id = "resultText">Loading Results...</p>
+            <p>Are you related to this region?</p>
             <div class="ey">
                 <select id = "validation">
                     <option value="Yes">Yes</option>
@@ -140,7 +149,8 @@
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select><br></br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" id="submitButton"><br><br>
+            <p id="submitMessage"></p>
           </div>
         </div>
     </div>
@@ -150,7 +160,7 @@
   <!-- Footer -->
   <footer class="py-5 bg-black">
     <div class="container">
-      <p class="m-0 text-center text-white small">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white small">Copyright &copy; CMU 11-791</p>
     </div>
     <!-- /.container -->
   </footer>
@@ -158,6 +168,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
 
 </body>
 
