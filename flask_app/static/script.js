@@ -21,7 +21,7 @@ $("#moment-pane-file-btn")[0].oninput = function() {
 
     
     var data=new FormData()
-          data.append('audio',$("#moment-pane-file-btn").files)
+          data.append('audio',$("#moment-pane-file-btn")[0].files[0])
 
     for (var p of data) {
       console.log(p);
@@ -29,7 +29,7 @@ $("#moment-pane-file-btn")[0].oninput = function() {
           $.ajax({
               url:"/upload",
               type:'POST',
-              data: data,//new FormData($("#moment-pane-upload-form")[0]),
+              data: new FormData($("#moment-pane-upload-form")[0]),
               cache: false,
               processData: false,
               contentType: false,
