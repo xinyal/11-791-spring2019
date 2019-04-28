@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
@@ -21,8 +20,9 @@
   <link href="../static/css/one-page-wonder.css" rel="stylesheet">
 
   <!-- Link to script file -->
-  
+  <link rel="shortcut icon" href="favicon.ico">
 
+  
 </head>
 
 <body>
@@ -61,7 +61,9 @@
           the horizon.  There is, according to legend, a boiling pot of gold at one end.  People look, but no one ever 
           finds it.  When a man looks for something beyond his reach, his friends say he is looking for the pot of gold 
           at the end of the rainbow.</p>
-        <input type="file" accept="audio/*" class="btn btn-primary btn-xl rounded-pill mt-5" id = "fileInput">
+          <form id="moment-pane-upload-form" enctype="multipart/form-data">
+            <input id="moment-pane-file-btn" accept="audio/*" type="file" class="btn btn-primary btn-xl rounded-pill mt-5" name="audio" multiple>
+          </form>
       </div>
     </div>
     <div class="bg-circle-1 bg-circle"></div>
@@ -169,6 +171,7 @@
   <script src="../static/vendor/jquery/jquery.min.js"></script>
   <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="../static/script.js"></script>
+
 
 </body>
 
