@@ -43,7 +43,7 @@ def index():
         conn.commit()
 
         # Display confirmation page
-        return("<h1>Thank you for submitting!</h1>")
+        return "<h1>Thank you for submitting!</h1>"
 
 @app.route('/upload',methods=['POST'])
 def upload(): 
