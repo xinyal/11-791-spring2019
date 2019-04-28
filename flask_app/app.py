@@ -7,6 +7,9 @@ from flask import jsonify
 from flask import send_from_directory
 import os
 
+# our model
+from toMFCC import get_mfcc
+# import phenome.phenome_model.dialect
 
 app = Flask(__name__)
 
@@ -46,17 +49,25 @@ def index():
         return "<h1>Thank you for submitting!</h1>"
 
 @app.route('/upload',methods=['POST'])
-def upload(): 
+def upload():
     file=request.files['audio']
-       
+
     print('the file is', file)
     filename=file.filename.split('.')[0]+'_new.'+file.filename.split('.')[-1]
     path = os.path.join(os.getcwd(), filename)
-    
+
     # Save file to the path
     file.save(path)
     print('GET=',file.filename)
     print('UPLOAD=',filename,'#'*50)
+
+    # extract features
+    feat_filepath = get_mfcc(path, '.')
+    print('FEATURES EXTRACTED:', feat_filepath)
+
+    # send features as test to model
+    #TODO
+
     return jsonify({"path":path})
 
 
