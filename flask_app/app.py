@@ -16,17 +16,34 @@ app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = '11-791project'
 app.config['MYSQL_DATABASE_DB'] = 'dialect_info'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-mysql.init_app(app)
-conn = mysql.connect()
-cursor = conn.cursor()
 
 # Behavior for root URL pattern
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    cursor.execute("INSERT INTO responses VALUES(0, \"Yes\", \"California\", \"Texas\", \"No\")")
-    conn.commit()
-    print("hello")
-    return render_template("index.html")
+    # Handles GET requests
+    if request.method == 'GET':
+        return render_template("index.html")
+
+    # Handles POST requests
+    else:
+        # Extract input from request
+        correct_label = request.form.get("correct_label")
+        home_state = request.form.get("home_state")
+        other_states = request.form.get("other_states")
+        second_language = request.form.get("second_language")
+
+        # Connect to database
+        mysql.init_app(app)
+        conn = mysql.connect()
+        cursor = conn.cursor()
+
+        # Insert values into database
+        sql = "INSERT INTO responses VALUES(NULL, %s, %s, %s, %s)"
+        cursor.execute(sql, (correct_label, home_state, other_states, second_language))
+        conn.commit()
+
+        # Display confirmation page
+        return("<h1>Thank you for submitting!</h1>")
 
 @app.route('/upload',methods=['POST'])
 def upload(): 
@@ -36,7 +53,7 @@ def upload():
     filename=file.filename.split('.')[0]+'_new.'+file.filename.split('.')[-1]
     path = os.path.join(os.getcwd(), filename)
     
-    #Save file to the path
+    # Save file to the path
     file.save(path)
     print('GET=',file.filename)
     print('UPLOAD=',filename,'#'*50)
@@ -50,5 +67,4 @@ def download(filename):
 
 
 if __name__ == '__main__':
-
     app.run()

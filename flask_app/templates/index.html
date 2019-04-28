@@ -79,8 +79,9 @@
             <h2 class="display-4">Prediction Results</h2>
             <p id = "resultText">Loading Results...</p>
             <p>Are you related to this region?</p>
+              <form action="" method="post">
             <div class="ey">
-                <select id = "validation">
+                <select name = "correct_label">
                     <option value="Yes">Yes</option>
                     <option value="No">No</option>
                 </select><br></br>
@@ -88,7 +89,7 @@
             <hr>
             <h3 class="display-4" style="font-size:110%;">We would like to learn a bit more information about you.</h3>
             <p>1. In what state were you born (if you were born outside of the U.S., please select N/A)?</p>
-            <select id = "home_state">
+            <select name = "home_state">
                 <option value="NA">N/A</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
@@ -143,15 +144,16 @@
                 <option value="WY">Wyoming</option>
             </select><br></br>
             <p>2. Have you lived in a different U.S. state for more than 6 months in the past five years? If so, please list the state names separated by comma.</p>
-            <form>
-                <input type="text" name="cities" id = "other_states"><br>
-            </form><br>
+
+                <input type="text" name = "other_states"><br>
+            <br>
             <p>3. Are you fluent in a second language?</p>
-            <select class="ey" id = "second_language">
+            <select class="ey" name = "second_language">
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
             </select><br></br>
             <input type="submit" value="Submit" id="submitButton"><br><br>
+                  </form>
             <p id="submitMessage"></p>
           </div>
         </div>
