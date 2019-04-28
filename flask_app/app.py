@@ -1,14 +1,14 @@
 from flask import Flask
 from flask import render_template
 
-from flaskext.mysql import MySQL
+from flaskext.mysql import MySQL  # pip install flask-mysql
 from flask import request
 from flask import jsonify
 from flask import send_from_directory
 import os
 
 # our model
-from toMFCC import get_mfcc
+from src.toMFCC import get_mfcc
 # import phenome.phenome_model.dialect
 
 app = Flask(__name__)
@@ -54,6 +54,7 @@ def upload():
 
     print('the file is', file)
     filename=file.filename.split('.')[0]+'_new.'+file.filename.split('.')[-1]
+    # saves to root directory
     path = os.path.join(os.getcwd(), filename)
 
     # Save file to the path
@@ -67,6 +68,7 @@ def upload():
 
     # send features as test to model
     #TODO
+    # label =
 
     return jsonify({"path":path})
 
