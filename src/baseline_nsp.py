@@ -37,7 +37,7 @@ def get_label(fname):
 LABEL_DICT = {'at':0, 'mi':1, 'ne':2, 'no':3, 'so':4, 'we':5}
 
 #######################
-# Function Definitions 
+# Function Definitions
 #######################
 def process_input(input_type, input_filepaths=ID_PATH, feat_dir=FEATURE_PATH):
     # Process input # input_type = {'dev', 'train'}
@@ -88,7 +88,7 @@ def collate(batch): # batch = [trainset[5274],trainset[3274],trainset[1]]
 class encoder(nn.Module): # https://github.com/srvk/Yunitator/blob/master/Yunitator/Net.py
     def __init__(self, input_dim=40, hidden_dim=10, output_size=6):
         super(encoder, self).__init__()
-        self.gru = nn.GRU(input_size = input_dim, hidden_size=hidden_dim, 
+        self.gru = nn.GRU(input_size = input_dim, hidden_size=hidden_dim,
             num_layers=2, bidirectional = True)#, batch_first = True)
         #self.gru = nn.GRU(input_size=input_dim, )
         #self.fc2 = nn.Linear(hidden_dim, 3)
@@ -102,7 +102,8 @@ class encoder(nn.Module): # https://github.com/srvk/Yunitator/blob/master/Yunita
         # https://discuss.pytorch.org/t/how-to-cast-a-tensor-to-another-type/2713/8
         #self.gru.input_size = seq_p.size(-1) # expect input_size = input.size(-1)
         seq = seq.type(torch.FloatTensor) # torch.cuda.FloatTensor
-        seq = seq.cuda()
+        if torch.cuda.is_available():
+            seq = seq.cuda()
         #pdb.set_trace()
         x = self.gru(seq)[0] # a tuple of 2 tensor. [40,3,1000] and [4,40,500]. [fs, bs, 2*hs] [2*nl, fs, hs]
         #x = pack_padded_sequence(seq, lens, batch_first=True)

@@ -9,6 +9,7 @@ import os
 
 # our model
 from src.toMFCC import get_mfcc
+from src.pred_func import pred
 # import phenome.phenome_model.dialect
 
 app = Flask(__name__)
@@ -67,8 +68,9 @@ def upload():
     print('FEATURES EXTRACTED:', feat_filepath)
 
     # send features as test to model
-    #TODO
-    # label =
+    # Xinya's model
+    label = pred(feat_filepath)
+    print(label)
 
     return jsonify({"path":path})
 
