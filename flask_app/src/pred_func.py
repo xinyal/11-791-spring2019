@@ -1,4 +1,4 @@
-from baseline_nsp import *
+from src.baseline_nsp import *
 
 def pred(filename):
 	INV_LABEL_DICT = {0:'at', 1:'mi', 2:'ne', 3:'no', 4:'so', 5:'we'}

@@ -1,15 +1,3 @@
-//A dictionary mapping numbers to our classification regions
-var regions = {
-    0: "Mid-Atlantic",
-    1: "Midland",
-    2: "New England",
-    3: "Northern",
-    4: "Southern",
-    5: "Western"
-}
-
-
-          
 
 //Returns a random integer between 0 and the given value
 function getRandomInt(max) {
@@ -21,43 +9,35 @@ $("#moment-pane-file-btn")[0].oninput = function() {
 
     //append the file to the formdata
     var data=new FormData()
-          data.append('audio',$("#moment-pane-file-btn")[0].files[0])
+    data.append('audio',$("#moment-pane-file-btn")[0].files[0])
 
     //show the file
     for (var p of data) {
-      console.log(p);
+        console.log(p);
     }
-          //pass the audio file to the server by calling the upload method
-          $.ajax({
-              url:"/upload",
-              type:'POST',
-              data: new FormData($("#moment-pane-upload-form")[0]),
-              cache: false,
-              processData: false,
-              contentType: false,
-              error: function(){
-                  console.log("upload error")
-              },
-              success: function(data){
-                  console.log(data);
-                  console.log("upload success");
-              }
-          })
-
-
-    //Generate random region
-    var randomIndex = getRandomInt(6);
-    var region = regions[randomIndex];
-    
-    //Display result
-    $("#resultText").html("We predict that you are from the <b>" + region + "</b> region.");
+    // Pass the audio file to the server by calling the upload method
+    // Display the resulting label upon completion
+    $.ajax({
+        url:"/upload",
+        type:'POST',
+        data: new FormData($("#moment-pane-upload-form")[0]),
+        cache: false,
+        processData: false,
+        contentType: false,
+        error: function(){
+            console.log("upload error")
+        },
+        success: function(label){
+            $("#resultText").html("We predict that you are from the <b>" + label + "</b> region.");
+        }
+    })
 
     //Scroll the page to result region
     $('html,body').animate({
-        scrollTop: $("#results").offset().top},
+            scrollTop: $("#results").offset().top},
         'slow');
-        
-  }
+
+}
 
 
 $("#submitButton").click(function() {
@@ -66,6 +46,6 @@ $("#submitButton").click(function() {
 
 
 $.get( "ajax/index.html", function( data ) {
-  $( ".result" ).html( data );
-  alert( "Load was performed." );
+    $( ".result" ).html( data );
+    alert( "Load was performed." );
 });

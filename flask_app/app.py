@@ -72,7 +72,7 @@ def upload():
     label = pred(feat_filepath)
     print(label)
 
-    return jsonify({"path":path})
+    return label
 
 
 @app.route('/download/<filename>')
