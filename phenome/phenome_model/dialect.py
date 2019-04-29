@@ -13,8 +13,14 @@ from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence, pad_se
 from torch.utils.data import DataLoader
 
 
+def predict(mfcc_path, model):
+    mfcc = np.load(mfcc_path)
+    mfcc = mfcc.T.reshape(1, mfcc.shape[1], mfcc.shape[0])
+    pred = torch.argmax(model(mfcc)[0]).item()
+    return pred
+
 class DialectModel(nn.Module):
-    def __init__(self, pt, max_frame_size=1000):
+    def __init__(self, max_frame_size=1000, use_cuda=True):
         super(DialectModel, self).__init__()
         
         # self.phenome_model = torch.load(pt)
@@ -31,7 +37,9 @@ class DialectModel(nn.Module):
         self.linear1 = nn.Linear(640, 256)
         self.linear2 = nn.Linear(256, 6)
 
-        self.cuda()
+        if use_cuda:
+            self.cuda()
+        self.use_cuda = use_cuda
         
     def phenome_feature(self, inputs):
         # packed, sort_order, unsort_order, lengths = sort_pad_pack_batch(inputs)
@@ -59,7 +67,9 @@ class DialectModel(nn.Module):
         # # print(outputs.shape)
         # pred = self.linear(outputs)
 
-        out = torch.unsqueeze(torch.from_numpy(inputs).float().cuda(), dim=1)
+        out = torch.unsqueeze(torch.from_numpy(inputs).float(), dim=1)
+        if self.use_cuda:
+            out = out.cuda()
         out = self.res1(out)
         # out = self.res2(out)
         # out = self.res3(out)
@@ -130,7 +140,7 @@ class DialectDataloader(DataLoader):
 
 if __name__ == '__main__':
 
-    model = DialectModel('epoch-29.pt')
+    model = DialectModel()
 
     train_loader = DialectDataloader('../../../MFCC/', '../../en_data/filepaths.train', 32, 1000)
     dev_loader = DialectDataloader('../../../MFCC/', '../../en_data/filepaths.dev', 32, 1000, shuffle=False)
