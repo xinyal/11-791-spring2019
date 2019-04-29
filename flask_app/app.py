@@ -5,6 +5,10 @@ from flask import jsonify
 from flask import send_from_directory
 import os
 
+# our model
+from src.toMFCC import get_mfcc
+from src.pred_func import pred
+
 app = Flask(__name__)
 
 

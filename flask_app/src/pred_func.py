@@ -1,7 +1,7 @@
 from src.baseline_nsp import *
 
 def pred(filename):
-	INV_LABEL_DICT = {0:'at', 1:'mi', 2:'ne', 3:'no', 4:'so', 5:'we'}
+	INV_LABEL_DICT = {0:'Mid-Atlantic', 1:'Midland', 2:'New England', 3:'North', 4:'South', 5:'West'}
 
 	# loading model
 	if torch.cuda.is_available():
