@@ -169,8 +169,11 @@ class DialectDataloader(DataLoader):
         return len(self.batches)
 
 # API
-MODEL = DialectModel()
-LABEL_DICT = {0:'Mid-Atlantic', 1:'Midland', 2:'New England', 3:'North', 4:'South', 5:'West'}
+if __name__ != '__main__':
+    MODEL = DialectModel(use_cuda=False)
+    MODEL.load_state_dict(torch.load('epoch_3.pt', map_location='cpu'))
+    LABEL_DICT = {0:'Mid-Atlantic', 1:'Midland', 2:'New England', 3:'North', 4:'South', 5:'West'}
+
 def predict(mfcc_path, frame_size=1000):
     mfcc = np.load(mfcc_path)
     if mfcc.shape[1] < frame_size:
@@ -224,3 +227,5 @@ if __name__ == '__main__':
                     fout.write('{} {}\n'.format(p, l))
             fout.close()
             print('epoch {} dev acc: {}'.format(epoch, dev_acc / len(dev_loader)))
+
+        torch.save(model.state_dict(), 'epoch_{}.pt'.format(epoch))
