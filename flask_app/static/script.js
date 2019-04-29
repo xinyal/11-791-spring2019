@@ -19,13 +19,15 @@ function getRandomInt(max) {
 //Once input is given, display random result on page
 $("#moment-pane-file-btn")[0].oninput = function() {
 
-    
+    //append the file to the formdata
     var data=new FormData()
           data.append('audio',$("#moment-pane-file-btn")[0].files[0])
 
+    //show the file
     for (var p of data) {
       console.log(p);
     }
+          //pass the audio file to the server by calling the upload method
           $.ajax({
               url:"/upload",
               type:'POST',
@@ -60,4 +62,10 @@ $("#moment-pane-file-btn")[0].oninput = function() {
 
 $("#submitButton").click(function() {
     $("#submitMessage").html("<b>Your submission has been received, thank you!</b>");
+});
+
+
+$.get( "ajax/index.html", function( data ) {
+  $( ".result" ).html( data );
+  alert( "Load was performed." );
 });
