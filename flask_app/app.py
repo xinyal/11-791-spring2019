@@ -8,6 +8,7 @@ import os
 # our model
 from src.toMFCC import get_mfcc
 from src.pred_func import pred
+from dialect import predict
 
 app = Flask(__name__)
 
@@ -37,10 +38,12 @@ def upload():
 
     # send features as test to model
     # Xinya's model
-    label = pred(feat_filepath)
-    print(label)
+    label1 = pred(feat_filepath)
+    # Xianyang's model
+    label2 = predict(feat_filepath)
+    print(label1, label2)
 
-    return label
+    return label1
 
 
 @app.route('/get',methods=['GET'])
