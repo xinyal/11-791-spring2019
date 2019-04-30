@@ -26,7 +26,7 @@ ID_PATH = os.path.abspath(REPO_PATH + "/en_data")
 FEATURE_PATH = os.path.join(DATA_PATH + "/MFCC")
 ### Help:  Piazza posts: https://piazza.com/class/j9xdaodf6p1443?cid=2774
 # hidden = 256
-batch_size = 10
+batch_size = 21
 
 def get_label(fname):
     regions = ['at', 'mi', 'ne', 'no', 'so', 'we']
@@ -152,7 +152,7 @@ def main():
 
     print("The target size is ", 6)
 
-    num_epochs=2
+    num_epochs = 10
     best_acc = -1
 
     if torch.cuda.is_available():
