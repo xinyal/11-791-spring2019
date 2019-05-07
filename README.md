@@ -6,6 +6,6 @@ The primary purpose of this project was twofold:
 
 The web application was built using the Flask micro-framework, which allowed us to combine powerful machine learning libraries with web functionality in a native Python environment.
 ## How to Use
-The primary application files are located in the `flask_app` folder, in which the `app.py` file contains the main program driver. Within the `flask_app` directory, the back-end classifcation code can be found within the `src` folder, while the front-end web files can be found in the `static` and `template` folders.
+The primary application files are located in the `flask_app` directory, in which the `app.py` file contains the main program driver. Within this directory, the back-end classifcation code can be found within the `src` folder, while the front-end web files can be found in the `static` and `template` folders.
 
 To run the application, simply run the `app.py` file and navigate to the locally hosted URL shown in the console.
