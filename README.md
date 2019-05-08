@@ -12,3 +12,5 @@ The web application was built using the Flask micro-framework, which allowed us 
 The primary application files are located in the `flask_app` directory, in which the `app.py` file contains the main program driver. Within this directory, the back-end classifcation code can be found within the `src` folder, while the front-end web files can be found in the `static` and `template` folders.
 
 To run the application, simply run the `app.py` file and navigate to the locally hosted URL shown in the console.
+
+*: the `baseline_nsp.py` contains the model and training code for the "Yunitator" model of the two models we implemented. `baseline` is rather a misnomer as it is not really a baseline model provided in class.
